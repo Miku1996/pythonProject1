@@ -1,0 +1,50 @@
+ public String getDemandNo(String mcode,String subCode,String pn,String financialYr){
+
+        String schema ="Budget";
+        String tableName="VWNPN_PLAN";
+        String tableName2="demdtl";
+        String demandNo="";
+        if (Integer.parseInt(mcode.substring(0,4))< 8000) {
+            if (subCode.substring(0, 2).equals("00")) {
+                subCode = subCode.substring(2);
+            } else {
+                subCode = subCode.substring(0, 2);
+            }
+
+            if(StringUtils.hasLength(pn)){
+                String query = "select demand_no from "+schema+"."+tableName+financialYr+" where mcode = :mcode and sub_code = :subCode and planType= :planType and (RE+JCF)>0";
+
+            }
+            else {
+                String query = "select demand_no from "+schema+"."+tableName+financialYr+" where mcode = :mcode and sub_code = :subCode  and (RE+JCF)>0";
+
+            }
+        }
+        else {
+            if (subCode.startsWith("00")) {
+                if(StringUtils.hasLength(pn)){
+                    String query = "select demand_no from "+schema+"."+tableName2+financialYr+" where mcode = :mcode and sub_code = :subCode and planType= :planType and (RE+JCF)>0";
+
+                }
+                else {
+                    String query = "select demand_no from "+schema+"."+tableName2+financialYr+" where mcode = :mcode and sub_code = :subCode  and (RE+JCF)>0";
+
+                }
+        }
+            else {
+                if (StringUtils.hasLength(pn)){
+                    
+                }
+            }
+    }
+	
+	service
+	
+	 String getDemandNo(String mcode, String subCode, String pn) {
+
+        String schema = "Budget";
+        String tableName = "VWNPN_PLAN";
+        String demandNo = "";
+        LocalDate localDate = LocalDate.now();
+        String financialYr = String.valueOf(localDate.getYear() + (localDate.getYear() + 1));
+        pn = "S";
